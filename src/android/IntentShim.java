@@ -115,7 +115,7 @@ public class IntentShim extends CordovaPlugin {
             try
             {
                 //  Ensure we only have a single registered broadcast receiver
-                ((CordovaActivity)this.cordova.getActivity()).unregisterReceiver(myBroadcastReceiver);
+                this.cordova.getActivity().unregisterReceiver(myBroadcastReceiver);
             }
             catch (IllegalArgumentException e) {}
 
@@ -168,7 +168,7 @@ public class IntentShim extends CordovaPlugin {
                 }
             }
 
-            ((CordovaActivity)this.cordova.getActivity()).registerReceiver(myBroadcastReceiver, filter);
+            this.cordova.getActivity().registerReceiver(myBroadcastReceiver, filter);
 
             callbackContext.sendPluginResult(result);
         }
@@ -176,7 +176,7 @@ public class IntentShim extends CordovaPlugin {
         {
             try
             {
-                ((CordovaActivity)this.cordova.getActivity()).unregisterReceiver(myBroadcastReceiver);
+                this.cordova.getActivity().unregisterReceiver(myBroadcastReceiver);
             }
             catch (IllegalArgumentException e) {}
         }
@@ -403,11 +403,11 @@ public class IntentShim extends CordovaPlugin {
             if (bExpectResult)
             {
                 cordova.setActivityResultCallback(this);
-                ((CordovaActivity) this.cordova.getActivity()).startActivityForResult(i, requestCode);
+                this.cordova.getActivity().startActivityForResult(i, requestCode);
             }
             else
             {
-                ((CordovaActivity)this.cordova.getActivity()).startActivity(i);
+                this.cordova.getActivity().startActivity(i);
                 callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
             }
         }
@@ -419,12 +419,12 @@ public class IntentShim extends CordovaPlugin {
     }
 
     private void sendBroadcast(Intent intent) {
-        ((CordovaActivity)this.cordova.getActivity()).sendBroadcast(intent);
+        this.cordova.getActivity().sendBroadcast(intent);
     }
 
     private void startService(Intent intent)
     {
-        ((CordovaActivity)this.cordova.getActivity()).startService(intent);
+        this.cordova.getActivity().startService(intent);
     }
 
     private Intent populateIntent(JSONObject obj, CallbackContext callbackContext) throws JSONException
